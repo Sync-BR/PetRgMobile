@@ -7,14 +7,17 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.petrg.meuspets.activity.main.RegisterActivity;
 import com.petrg.meuspets.callbacks.AuthCallback;
-import com.petrg.meuspets.interfaces.MainActivityInterface;
+import com.petrg.meuspets.implementation.Structure;
 import com.petrg.meuspets.model.LoginModel;
 import com.petrg.meuspets.service.LoginService;
 
-public class MainActivity extends AppCompatActivity implements MainActivityInterface {
+public class MainActivity extends AppCompatActivity implements Structure {
     private static final String PREFS_NAME = "login_prefs";
     private static final String KEY_USERNAME = "username";
     private static final String KEY_PASSWORD = "password";
@@ -31,13 +34,13 @@ public class MainActivity extends AppCompatActivity implements MainActivityInter
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-
         initializeUI();
         setupListeners();
-        getPreferences();
+        savePreferences();
     }
 
-    private void initializeUI() {
+    @Override
+    public void initializeUI() {
         loginService = new LoginService(this);
         userLogin = findViewById(R.id.login_editextUser);
         userPassword = findViewById(R.id.login_editextPassword);
@@ -46,7 +49,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityInter
         buttonRegister = findViewById(R.id.login_Button_Cadastrar);
     }
 
-    private void setupListeners() {
+    @Override
+    public void setupListeners() {
         buttonLogin.setOnClickListener(view -> {
             disableButton();
             authenticateUser();
@@ -54,11 +58,11 @@ public class MainActivity extends AppCompatActivity implements MainActivityInter
 
         buttonRegister.setOnClickListener(view -> {
             disableButton();
-            startActivity(new Intent(MainActivity.this, null));
+            startActivity(new Intent(MainActivity.this, RegisterActivity.class));
         });
     }
 
-    private void authenticateUser() {
+    public void authenticateUser() {
         LoginModel userDados = new LoginModel(userLogin.getText().toString(), userPassword.getText().toString());
         loginService.autenticar(userDados, MainActivity.this, new AuthCallback() {
             @Override
@@ -85,8 +89,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityInter
         buttonRegister.setEnabled(true);
     }
 
-    @Override
-    public void getPreferences() {
+    public void savePreferences() {
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         boolean rememberMe = sharedPreferences.getBoolean(KEY_REMEMBER_ME, false);
         if (rememberMe) {
