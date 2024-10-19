@@ -4,4 +4,13 @@
     <string name="senha">Senha</string>
     <string name="salvar_dados">Salvar dados</string>
     <string name="conectar">Conectar</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="nome">Nome</string>
+    <string name="apelido">Apelido</string>
+    <string name="email">Email</string>
+    <string name="cpf">cpf</string>
+    <string name="telephone">telefone</string>
+    <string name="buttonRegister">Next</string>
+    <string name="button_register_return">Voltar</string>
+    <string name="registe_date">Data de nascimento</string>
 </resources>
