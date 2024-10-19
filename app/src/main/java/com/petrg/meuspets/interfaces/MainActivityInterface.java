@@ -1,5 +1,6 @@
-package com.petrg.meuspets;
+package com.petrg.meuspets.interfaces;
 
+import android.annotation.SuppressLint;
 import android.content.ComponentCallbacks2;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -28,6 +29,11 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.savedstate.SavedStateRegistryOwner;
 
+@SuppressLint("RestrictedApi")
 public interface MainActivityInterface extends LayoutInflater.Factory2, Window.Callback, KeyEvent.Callback, View.OnCreateContextMenuListener, ComponentCallbacks2, LifecycleOwner, KeyEventDispatcher.Component, ContextAware, ViewModelStoreOwner, HasDefaultViewModelProviderFactory, SavedStateRegistryOwner, OnBackPressedDispatcherOwner, ActivityResultRegistryOwner, ActivityResultCaller, OnConfigurationChangedProvider, OnTrimMemoryProvider, OnNewIntentProvider, OnMultiWindowModeChangedProvider, OnPictureInPictureModeChangedProvider, OnUserLeaveHintProvider, MenuHost, FullyDrawnReporterOwner, ActivityCompat.OnRequestPermissionsResultCallback, ActivityCompat.RequestPermissionsRequestCodeValidator, AppCompatCallback, TaskStackBuilder.SupportParentable, ActionBarDrawerToggle.DelegateProvider {
+    void disableButton();
+
+    void enableButton();
+
     void getPreferences();
 }
