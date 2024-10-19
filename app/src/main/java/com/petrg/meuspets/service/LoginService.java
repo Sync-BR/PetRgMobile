@@ -43,7 +43,7 @@ public class LoginService  {
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
                 ((MainActivity) context).runOnUiThread(() -> {
                     callback.onAuthFailure();
-                    Toast.makeText(context, "Erro na solicitação: ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Servidor offline ou em manuntenção.", Toast.LENGTH_LONG).show();
                 });
             }
 
