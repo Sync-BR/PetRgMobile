@@ -23,9 +23,10 @@ public class RegisterActivity extends AppCompatActivity implements Structure {
     private EditText textName, textSurname, textEmail, textCpf, textTelephone, textDate;
     private Button button_register, button_return;
     private Calendar myCalendar;
-    private void updateDate(){
+
+    private void updateDate() {
         String myFormat = "dd/MM/YYYY";
-        SimpleDateFormat format = new SimpleDateFormat(myFormat, new Locale("pt","BR"));
+        SimpleDateFormat format = new SimpleDateFormat(myFormat, new Locale("pt", "BR"));
         textDate.setText(format.format(myCalendar.getTime()));
     }
 
@@ -63,7 +64,9 @@ public class RegisterActivity extends AppCompatActivity implements Structure {
         button_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Código para proxima tela
+                disableButton();
+                Intent loginRegistrationScreen = new Intent(RegisterActivity.this, RegisterLoginActivity.class);
+                startActivity(loginRegistrationScreen);
             }
         });
         button_return.setOnClickListener(new View.OnClickListener() {
@@ -74,13 +77,10 @@ public class RegisterActivity extends AppCompatActivity implements Structure {
                 startActivity(returnHomeScreen);
             }
         });
-
-
-
     }
 
     private void getCalendar() {
-         myCalendar = Calendar.getInstance();
+        myCalendar = Calendar.getInstance();
         DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
