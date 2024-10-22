@@ -5,69 +5,52 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context=".activity.register.RegisterActivity">
+    tools:context=".activity.register.RegisterLoginActivity">
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:scaleType="centerCrop"
+        android:layout_height="300dp"
         android:layout_marginBottom="40dp"
+        android:scaleType="centerCrop"
         app:srcCompat="@drawable/ic_launcher_background" />
 
+
     <EditText
-        android:id="@+id/text_name"
+        android:id="@+id/text_login"
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="@string/nome" />
+        android:text="@string/login" />
+
     <EditText
-        android:id="@+id/text_surname"
+        android:id="@+id/text_password"
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="@string/apelido" />
+        android:text="@string/password" />
+
     <EditText
-        android:id="@+id/text_email"
+        android:id="@+id/text_repeat_password"
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="@string/email" />
-    <EditText
-        android:id="@+id/text_cpf"
-        style="@style/TextAppearance.AppCompat.Title"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:inputType="number"
-        android:text="@string/cpf" />
-    <EditText
-        android:id="@+id/text_telephone"
-        style="@style/TextAppearance.AppCompat.Title"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:text="@string/telephone" />
-    <EditText
-        android:id="@+id/text_register_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="date"
-        android:text="@string/registe_date"/>
+        android:text="@string/repeatpassword" />
+
     <Button
-        android:id="@+id/button_register_user"
+        android:id="@+id/button_register_user_next"
         style="@style/Widget.Design.BottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="60dp"
         android:layout_marginBottom="10dp"
         android:text="@string/buttonRegister" />
 
     <Button
-        android:id="@+id/button_register_return"
+        android:id="@+id/button_register_return_next"
         style="@style/Widget.Design.BottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/button_register_return" />
-
 
 </LinearLayout>
