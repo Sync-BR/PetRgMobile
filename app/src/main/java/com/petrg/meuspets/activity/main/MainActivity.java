@@ -1,4 +1,4 @@
-package com.petrg.meuspets;
+package com.petrg.meuspets.activity.main;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +11,8 @@ import android.widget.EditText;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.petrg.meuspets.activity.main.RegisterActivity;
+import com.petrg.meuspets.R;
+import com.petrg.meuspets.activity.register.RegisterActivity;
 import com.petrg.meuspets.callbacks.AuthCallback;
 import com.petrg.meuspets.implementation.Structure;
 import com.petrg.meuspets.model.LoginModel;
@@ -30,6 +31,12 @@ public class MainActivity extends AppCompatActivity implements Structure {
     private SharedPreferences sharedPreferences;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        enableButton();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
@@ -38,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements Structure {
         setupListeners();
         savePreferences();
     }
+
 
     @Override
     public void initializeUI() {
