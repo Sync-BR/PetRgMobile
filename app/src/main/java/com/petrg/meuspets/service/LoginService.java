@@ -6,7 +6,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.petrg.meuspets.MainActivity;
+import com.petrg.meuspets.activity.main.MainActivity;
 import com.petrg.meuspets.callbacks.AuthCallback;
 import com.petrg.meuspets.model.LoginModel;
 
