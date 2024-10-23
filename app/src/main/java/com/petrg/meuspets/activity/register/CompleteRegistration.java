@@ -1,5 +1,6 @@
 package com.petrg.meuspets.activity.register;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.petrg.meuspets.R;
 import com.petrg.meuspets.implementation.Structure;
+import com.petrg.meuspets.model.UsuarioModel;
 
 public class CompleteRegistration extends AppCompatActivity implements Structure {
     private CheckBox toAccept;
@@ -19,6 +21,10 @@ public class CompleteRegistration extends AppCompatActivity implements Structure
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_termo_uso);
+        initializeUI();
+        setupListeners();
+        UsuarioModel user = (UsuarioModel) getIntent().getSerializableExtra("usuarios");
+        System.out.println(user);
     }
 
     @Override
@@ -32,7 +38,11 @@ public class CompleteRegistration extends AppCompatActivity implements Structure
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Ação para completa registro
+                if(toAccept.isChecked()){
+                    //Ação para registrar novo usuario
+                } else {
+                    //Ação para quando não estiver marcado
+                }
             }
         });
     }
