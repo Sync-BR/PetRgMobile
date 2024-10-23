@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,8 +24,7 @@ public class CompleteRegistration extends AppCompatActivity implements Structure
         setContentView(R.layout.activity_termo_uso);
         initializeUI();
         setupListeners();
-        UsuarioModel user = (UsuarioModel) getIntent().getSerializableExtra("usuarios");
-        System.out.println(user);
+
     }
 
     @Override
@@ -39,9 +39,10 @@ public class CompleteRegistration extends AppCompatActivity implements Structure
             @Override
             public void onClick(View view) {
                 if(toAccept.isChecked()){
-                    //Ação para registrar novo usuario
+                    disableButton();
+                    UsuarioModel user = (UsuarioModel) getIntent().getSerializableExtra("usuarios");
                 } else {
-                    //Ação para quando não estiver marcado
+                    toAccept.setError("Você deve aceitar os termos e condições.");
                 }
             }
         });
@@ -49,11 +50,13 @@ public class CompleteRegistration extends AppCompatActivity implements Structure
 
     @Override
     public void disableButton() {
-
+        register.setEnabled(false);
     }
 
     @Override
     public void enableButton() {
-
+        register.setEnabled(true);
     }
+
+
 }

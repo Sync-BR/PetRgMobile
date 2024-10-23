@@ -21,7 +21,8 @@
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:hint="@string/login" />
+        android:hint="@string/login"
+        />
 
     <EditText
         android:id="@+id/text_password"

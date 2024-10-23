@@ -7,12 +7,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.petrg.meuspets.R;
 import com.petrg.meuspets.activity.main.MainActivity;
+import com.petrg.meuspets.callbacks.ValidationCallback;
+import com.petrg.meuspets.callbacks.ValidationCpfCallback;
 import com.petrg.meuspets.implementation.Structure;
 import com.petrg.meuspets.model.UsuarioModel;
 import com.petrg.meuspets.service.register.Validation;
@@ -67,17 +70,62 @@ public class RegisterActivity extends AppCompatActivity implements Structure {
             @Override
             public void onClick(View view) {
                 disableButton();
-                //Verificar se o cpf e o email já estão cadastrado no banco de dados
-                Validation validation = new Validation(RegisterActivity.this);
-                validation.validationEmail(textEmail.getText().toString());
-                Intent loginRegistrationScreen = new Intent(RegisterActivity.this, RegisterLoginActivity.class);
-                loginRegistrationScreen.putExtra("name", textName.getText().toString());
-                loginRegistrationScreen.putExtra("surname", textSurname.getText().toString());
-                loginRegistrationScreen.putExtra("email", textEmail.getText().toString());
-                loginRegistrationScreen.putExtra("cpf", textCpf.getText().toString());
-                loginRegistrationScreen.putExtra("telephone", textTelephone.getText().toString());
-                loginRegistrationScreen.putExtra("date", textDate.getText().toString());
-                startActivity(loginRegistrationScreen);
+                if(checkAllFields()){
+                    Validation validation = new Validation(RegisterActivity.this);
+                    validation.validationEmail(textEmail.getText().toString(), new ValidationCallback() {
+                        @Override
+                        public void onAuthSuccess() {
+                            validation.validationCpf(textCpf.getText().toString(), new ValidationCpfCallback() {
+                                @Override
+                                public void onAuthSuccess() {
+                                    Intent loginRegistrationScreen = new Intent(RegisterActivity.this, RegisterLoginActivity.class);
+                                    loginRegistrationScreen.putExtra("name", textName.getText().toString());
+                                    loginRegistrationScreen.putExtra("surname", textSurname.getText().toString());
+                                    loginRegistrationScreen.putExtra("email", textEmail.getText().toString());
+                                    loginRegistrationScreen.putExtra("cpf", textCpf.getText().toString());
+                                    loginRegistrationScreen.putExtra("telephone", textTelephone.getText().toString());
+                                    loginRegistrationScreen.putExtra("date", textDate.getText().toString());
+                                    startActivity(loginRegistrationScreen);
+                                }
+
+                                @Override
+                                public void onAuthFailure() {
+                                    ((RegisterActivity) RegisterActivity.this).runOnUiThread(() -> {
+                                        Toast.makeText(RegisterActivity.this, "O CPF informado já está cadastrado no sistema. ", Toast.LENGTH_LONG).show();
+                                    });
+                                    enableButton();
+                                }
+
+                                @Override
+                                public void onServerFailure() {
+                                    ((RegisterActivity) RegisterActivity.this).runOnUiThread(() -> {
+                                        Toast.makeText(RegisterActivity.this, " Estamos enfrentando um problema no servidor. Por favor, tente novamente mais tarde.. ", Toast.LENGTH_LONG).show();
+                                    });
+                                    enableButton();
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onAuthFailure() {
+                            ((RegisterActivity) RegisterActivity.this).runOnUiThread(() -> {
+                                Toast.makeText(RegisterActivity.this, "O Email informado já está cadastrado no sistema. ", Toast.LENGTH_LONG).show();
+                            });
+                            enableButton();
+                        }
+
+                        @Override
+                        public void onServerFailure() {
+                            ((RegisterActivity) RegisterActivity.this).runOnUiThread(() -> {
+                                Toast.makeText(RegisterActivity.this, " Estamos enfrentando um problema no servidor. Por favor, tente novamente mais tarde.. ", Toast.LENGTH_LONG).show();
+                            });
+                            enableButton();
+                        }
+                    });
+                } else {
+                    enableButton();
+                }
+
             }
         });
         button_return.setOnClickListener(new View.OnClickListener() {
@@ -118,4 +166,22 @@ public class RegisterActivity extends AppCompatActivity implements Structure {
         button_register.setEnabled(true);
         button_return.setEnabled(true);
     }
+
+    public boolean checkAllFields() {
+        if (textName.length() == 0) {
+            textName.setError("Por favor, insira o nome.");
+            return false;
+        } else if (textEmail.length() == 0) {
+            textEmail.setError("O campo de e-mail não pode estar vazio.");
+            return false;
+        } else if (textCpf.length() == 0) {
+            textCpf.setError("O CPF não pode estar em branco.");
+            return false;
+        } else if (textDate.length() == 0) {
+            textDate.setError("É necessário selecionar uma data.");
+            return false;
+        }
+        return true;
+    }
+
 }
