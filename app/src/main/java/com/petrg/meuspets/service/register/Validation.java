@@ -5,6 +5,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.petrg.meuspets.activity.register.RegisterActivity;
+import com.petrg.meuspets.callbacks.ValidationCallback;
+import com.petrg.meuspets.callbacks.ValidationCpfCallback;
 
 import java.io.IOException;
 
@@ -20,9 +22,8 @@ public class Validation {
     public Validation(Context context) {
         this.context = context;
     }
-    //Refatorar todo o codigo
-    public void validationEmail(String email) {
-        System.out.println("passei" + email);
+
+    public void validationEmail(String email, ValidationCallback validation) {
         String url = "http://186.247.89.58:8080/api/user/check/email/" + email;
         OkHttpClient cliente = new OkHttpClient();
         Request request = new Request.Builder().url(url).get().build();
@@ -30,23 +31,40 @@ public class Validation {
             try {
                 Response response = cliente.newCall(request).execute();
                 if (response.isSuccessful()) {
-                    System.out.println("Bem sucedis");
                     String responseBody = response.body().string();
                     if (responseBody.contains("true")) {
-                        System.out.println("Endereço de email existente");
+                        ((RegisterActivity) context).runOnUiThread(validation::onAuthFailure);
                     } else if (responseBody.contains("false")) {
-                        System.out.println("Não encontrado esse endereço de email");
+                        ((RegisterActivity) context).runOnUiThread(validation::onAuthSuccess);
                     }
                 } else {
-                    //Refactor
-                    ((RegisterActivity) context).runOnUiThread(() -> {
-                        Toast.makeText(context, "Falhou ao verificar cpf", Toast.LENGTH_LONG).show();
-                    });
+                    ((RegisterActivity) context).runOnUiThread(validation::onServerFailure);
                 }
             } catch (IOException e) {
                 e.getMessage();
             }
         }).start();
-
+    }
+    public void validationCpf(String cpf, ValidationCpfCallback validationCPF) {
+        String url = "http://186.247.89.58:8080/api/user/check/cpf/" + cpf;
+        OkHttpClient cliente = new OkHttpClient();
+        Request request = new Request.Builder().url(url).get().build();
+        new Thread(() -> {
+            try {
+                Response response = cliente.newCall(request).execute();
+                if (response.isSuccessful()) {
+                    String responseBody = response.body().string();
+                    if (responseBody.contains("true")) {
+                        ((RegisterActivity) context).runOnUiThread(validationCPF::onAuthFailure);
+                    } else if (responseBody.contains("false")) {
+                        ((RegisterActivity) context).runOnUiThread(validationCPF::onAuthSuccess);
+                    }
+                } else {
+                    ((RegisterActivity) context).runOnUiThread(validationCPF::onServerFailure);
+                }
+            } catch (IOException e) {
+                e.getMessage();
+            }
+        }).start();
     }
 }
