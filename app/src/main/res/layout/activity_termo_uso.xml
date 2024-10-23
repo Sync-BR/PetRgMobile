@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".activity.register.CompleteRegistration">
+
+    <TextView
+        android:id="@+id/text_termo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/termo_titulo"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        android:paddingTop="15dp">
+
+        <TextView
+            android:id="@+id/text_termo_descricao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/termo_description" />
+    </ScrollView>
+
+    <CheckBox
+        android:id="@+id/text_confirm_termo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/aceita_termo"
+        />
+    <Button
+        android:id="@+id/button_register"
+        style="@style/Widget.Design.BottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/completeRegistration" />
+
+</LinearLayout>

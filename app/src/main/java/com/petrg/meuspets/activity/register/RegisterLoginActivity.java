@@ -45,7 +45,9 @@ public class RegisterLoginActivity extends AppCompatActivity implements Structur
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Ação para proxima tela
+                //Terms of use screen
+                Intent termsScreen = new Intent(RegisterLoginActivity.this, CompleteRegistration.class);
+                startActivity(termsScreen);
                 disableButton();
             }
         });
