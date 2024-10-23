@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.petrg.meuspets.R;
 import com.petrg.meuspets.activity.main.MainActivity;
 import com.petrg.meuspets.implementation.Structure;
+import com.petrg.meuspets.model.UsuarioModel;
+import com.petrg.meuspets.service.register.Validation;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -65,7 +67,16 @@ public class RegisterActivity extends AppCompatActivity implements Structure {
             @Override
             public void onClick(View view) {
                 disableButton();
+                //Verificar se o cpf e o email já estão cadastrado no banco de dados
+                Validation validation = new Validation(RegisterActivity.this);
+                validation.validationEmail(textEmail.getText().toString());
                 Intent loginRegistrationScreen = new Intent(RegisterActivity.this, RegisterLoginActivity.class);
+                loginRegistrationScreen.putExtra("name", textName.getText().toString());
+                loginRegistrationScreen.putExtra("surname", textSurname.getText().toString());
+                loginRegistrationScreen.putExtra("email", textEmail.getText().toString());
+                loginRegistrationScreen.putExtra("cpf", textCpf.getText().toString());
+                loginRegistrationScreen.putExtra("telephone", textTelephone.getText().toString());
+                loginRegistrationScreen.putExtra("date", textDate.getText().toString());
                 startActivity(loginRegistrationScreen);
             }
         });

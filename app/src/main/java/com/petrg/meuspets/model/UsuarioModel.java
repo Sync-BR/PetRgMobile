@@ -1,16 +1,30 @@
 package com.petrg.meuspets.model;
 
-import java.util.Date;
+import java.io.Serializable;
 
-public class UsuarioModel {
+
+public class UsuarioModel implements Serializable {
     private int id;
     private String name;
     private String surname;
     private String email;
     private String cpf;
     private String telephone;
-    private Date datOfBirth;
+    private String datOfBirth;
     private LoginModel login;
+
+    public UsuarioModel(String name, String surname, String email, String cpf, String telephone, String data, LoginModel user){
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.cpf = cpf;
+        this.telephone = telephone;
+        this.datOfBirth = data;
+        this.login = user;
+    }
+
+
+
 
     public UsuarioModel() {
         login = new LoginModel();
@@ -78,11 +92,12 @@ public class UsuarioModel {
         this.telephone = telephone;
     }
 
-    public Date getDatOfBirth() {
+    public String getDatOfBirth() {
         return datOfBirth;
     }
 
-    public void setDatOfBirth(Date datOfBirth) {
+    public void setDatOfBirth(String datOfBirth) {
+
         this.datOfBirth = datOfBirth;
     }
 

@@ -1,18 +1,14 @@
 package com.petrg.meuspets.model;
 
-public class LoginModel {
+import java.io.Serializable;
+
+public class LoginModel implements Serializable {
     private int id;
     private String username;
     private String password;
-    private UsuarioModel usuario;
 
 
     public LoginModel() {
-    }
-
-    public LoginModel(UsuarioModel user) {
-        this.username = user.getLogin().getUsername();
-        this.password = user.getLogin().getPassword();
     }
 
     public LoginModel(String username, String password) {
@@ -26,7 +22,6 @@ public class LoginModel {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", usuario=" + usuario +
                 '}';
     }
 
