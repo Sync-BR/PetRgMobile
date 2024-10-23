@@ -50,11 +50,19 @@ public class RegisterLoginActivity extends AppCompatActivity implements Structur
             @Override
             public void onClick(View view) {
                 disableButton();
-                //Terms of use screen
-                UsuarioModel usuarioModel = receiveInformation(username.getText().toString(), password.getText().toString());
-                Intent termsScreen = new Intent(RegisterLoginActivity.this, CompleteRegistration.class);
-                termsScreen.putExtra("usuarios", usuarioModel);
-                startActivity(termsScreen);
+                if (checkAllFields()) {
+                    if (checkIdenticalPassword(password.getText().toString(), repeatPassword.getText().toString())) {
+                        //Terms of use screen
+                        UsuarioModel usuarioModel = receiveInformation(username.getText().toString(), password.getText().toString());
+                        Intent termsScreen = new Intent(RegisterLoginActivity.this, CompleteRegistration.class);
+                        termsScreen.putExtra("usuarios", usuarioModel);
+                        startActivity(termsScreen);
+                    } else {
+                        enableButton();
+                    }
+                } else {
+                    enableButton();
+                }
             }
         });
         buttonReturn.setOnClickListener(new View.OnClickListener() {
@@ -95,5 +103,28 @@ public class RegisterLoginActivity extends AppCompatActivity implements Structur
                 userDados
         );
         return userData;
+    }
+
+    //check for identical passwords
+    private boolean checkIdenticalPassword(String password, String reapeatPassword) {
+        if (password.equals(reapeatPassword)) {
+            return true;
+        }
+        repeatPassword.setError("As senhas informadas devem ser iguais.");
+        return false;
+    }
+
+    private boolean checkAllFields() {
+        if (username.length() == 0) {
+            username.setError("Por favor, insira um usuário.");
+            return false;
+        } else if (password.length() == 0) {
+            password.setError("O campo de senhal não pode estar vazio.");
+            return false;
+        } else if (repeatPassword.length() == 0) {
+            repeatPassword.setError("Por favor, repita a senha acima para confirmação.");
+            return false;
+        }
+        return true;
     }
 }
