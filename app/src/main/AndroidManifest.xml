@@ -27,6 +27,7 @@
         </activity>
         <activity android:name=".activity.register.RegisterActivity"/>
         <activity android:name=".activity.register.RegisterLoginActivity"/>
+        <activity android:name=".activity.register.CompleteRegistration"/>
 
     </application>
 
