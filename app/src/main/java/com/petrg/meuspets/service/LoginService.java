@@ -22,11 +22,11 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 
-public class LoginService  {
-    private static OkHttpClient cliente;
-    private static Context context;
-    private static Gson gson = new Gson();
-    private static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+public class LoginService {
+    private OkHttpClient cliente;
+    private Context context;
+    private Gson gson = new Gson();
+    private final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
     public LoginService(Context Context) {
         cliente = new OkHttpClient();
