@@ -23,7 +23,7 @@
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="@string/usuario" />
+        android:hint="@string/usuario" />
 
     <EditText
         android:id="@+id/login_editextPassword"
@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:inputType="textPassword"
-        android:text="@string/senha" />
+        android:hint="@string/senha"/>
 
     <CheckBox
         android:id="@+id/checkBox"

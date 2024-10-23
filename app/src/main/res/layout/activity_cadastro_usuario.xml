@@ -20,39 +20,43 @@
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="@string/nome" />
+        android:hint="@string/nome" />
     <EditText
         android:id="@+id/text_surname"
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="@string/apelido" />
+        android:hint="@string/apelido" />
     <EditText
         android:id="@+id/text_email"
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="@string/email" />
+        android:inputType="textWebEmailAddress"
+        android:hint="@string/email" />
     <EditText
         android:id="@+id/text_cpf"
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:inputType="number"
-        android:text="@string/cpf" />
+        android:hint="@string/cpf" />
     <EditText
         android:id="@+id/text_telephone"
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="@string/telephone" />
+        android:inputType="phone"
+        android:hint="@string/telephone" />
     <EditText
         android:id="@+id/text_register_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="date"
-        android:text="@string/registe_date"/>
+        android:hint="@string/registe_date"
+        android:focusable="false"
+        android:clickable="true"/>
     <Button
         android:id="@+id/button_register_user"
         style="@style/Widget.Design.BottomNavigationView"
