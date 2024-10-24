@@ -5,14 +5,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.petrg.meuspets.R;
+import com.petrg.meuspets.callbacks.register.ValidationCallback;
+import com.petrg.meuspets.callbacks.register.ValidationUserNameCallBack;
 import com.petrg.meuspets.implementation.Structure;
 import com.petrg.meuspets.model.LoginModel;
 import com.petrg.meuspets.model.UsuarioModel;
+import com.petrg.meuspets.service.register.Validation;
 
 import java.text.ParseException;
 
@@ -52,11 +56,35 @@ public class RegisterLoginActivity extends AppCompatActivity implements Structur
                 disableButton();
                 if (checkAllFields()) {
                     if (checkIdenticalPassword(password.getText().toString(), repeatPassword.getText().toString())) {
-                        //Terms of use screen
-                        UsuarioModel usuarioModel = receiveInformation(username.getText().toString(), password.getText().toString());
-                        Intent termsScreen = new Intent(RegisterLoginActivity.this, CompleteRegistration.class);
-                        termsScreen.putExtra("usuarios", usuarioModel);
-                        startActivity(termsScreen);
+                        Validation validationUsername = new Validation(RegisterLoginActivity.this);
+                        validationUsername.validationUsername(username.getText().toString(), new ValidationUserNameCallBack() {
+                            @Override
+                            public void onAuthSuccess() {
+                                //Terms of use screen
+                                UsuarioModel usuarioModel = receiveInformation(username.getText().toString(), password.getText().toString());
+                                Intent termsScreen = new Intent(RegisterLoginActivity.this, CompleteRegistration.class);
+                                termsScreen.putExtra("usuarios", usuarioModel);
+                                startActivity(termsScreen);
+
+                            }
+
+                            @Override
+                            public void onAuthFailure() {
+                                ((RegisterLoginActivity) RegisterLoginActivity.this).runOnUiThread(() -> {
+                                    Toast.makeText(RegisterLoginActivity.this, " O usuario informado já está cadastrado no sistema. ", Toast.LENGTH_LONG).show();
+                                });
+                                enableButton();
+                            }
+
+                            @Override
+                            public void onServerFailure() {
+                                ((RegisterLoginActivity) RegisterLoginActivity.this).runOnUiThread(() -> {
+                                    Toast.makeText(RegisterLoginActivity.this, " Estamos enfrentando um problema no servidor. Por favor, tente novamente mais tarde.. ", Toast.LENGTH_LONG).show();
+                                });
+                                enableButton();
+                            }
+                        });
+
                     } else {
                         enableButton();
                     }

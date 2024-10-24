@@ -1,4 +1,4 @@
-package com.petrg.meuspets.callbacks;
+package com.petrg.meuspets.callbacks.register;
 
 public interface ValidationCpfCallback {
     void onAuthSuccess();

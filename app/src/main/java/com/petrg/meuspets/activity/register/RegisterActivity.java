@@ -14,10 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.petrg.meuspets.R;
 import com.petrg.meuspets.activity.main.MainActivity;
-import com.petrg.meuspets.callbacks.ValidationCallback;
-import com.petrg.meuspets.callbacks.ValidationCpfCallback;
+import com.petrg.meuspets.callbacks.register.ValidationCallback;
+import com.petrg.meuspets.callbacks.register.ValidationCpfCallback;
 import com.petrg.meuspets.implementation.Structure;
-import com.petrg.meuspets.model.UsuarioModel;
 import com.petrg.meuspets.service.register.Validation;
 
 import java.text.SimpleDateFormat;
@@ -49,7 +48,6 @@ public class RegisterActivity extends AppCompatActivity implements Structure {
         setupListeners();
         getCalendar();
     }
-
 
     @Override
     public void initializeUI() {
