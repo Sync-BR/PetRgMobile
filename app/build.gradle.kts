@@ -32,6 +32,7 @@ android {
 }
 
 dependencies {
+    implementation ("androidx.appcompat:appcompat:1.6.1")
     implementation ("com.squareup.okhttp3:okhttp:4.9.0")
     implementation ("com.google.android.material:material:1.9.0")
     implementation ("androidx.drawerlayout:drawerlayout:1.1.1")
