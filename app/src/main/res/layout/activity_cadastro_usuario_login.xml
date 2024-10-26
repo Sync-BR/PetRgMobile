@@ -29,6 +29,7 @@
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:inputType="textPassword"
         android:hint="@string/password" />
 
     <EditText
@@ -36,6 +37,7 @@
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:inputType="textPassword"
         android:hint="@string/repeatpassword" />
 
     <Button
