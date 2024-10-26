@@ -28,6 +28,9 @@
         <activity android:name=".activity.register.RegisterActivity"/>
         <activity android:name=".activity.register.RegisterLoginActivity"/>
         <activity android:name=".activity.register.CompleteRegistration"/>
+        <activity android:name=".activity.user.UserActivity"/>
+        <activity android:name=".activity.pet.RegisterPetActivity"/>
+
 
     </application>
 

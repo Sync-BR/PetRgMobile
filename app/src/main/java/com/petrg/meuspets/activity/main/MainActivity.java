@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.petrg.meuspets.R;
 import com.petrg.meuspets.activity.register.RegisterActivity;
+import com.petrg.meuspets.activity.user.UserActivity;
 import com.petrg.meuspets.callbacks.AuthCallback;
 import com.petrg.meuspets.implementation.Structure;
 import com.petrg.meuspets.model.LoginModel;
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements Structure {
         loginService.autenticar(userDados, MainActivity.this, new AuthCallback() {
             @Override
             public void onAuthSuccess() {
-                startActivity(new Intent(MainActivity.this, null));
+                startActivity(new Intent(MainActivity.this, UserActivity.class));
             }
 
             @Override

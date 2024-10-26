@@ -21,4 +21,50 @@
     <string name="aceita_termo">Estou ciente ao continuar utilizando o aplicativo, você concorda com estes Termos de Uso.</string>
     <string name="completeRegistration">Registrar</string>
     <string name="cancelar">Cancelar</string>
+    <string name="adicionarPets">Adicionar Pet</string>
+    <string name="namepet">Nome do pet</string>
+    <string name="agepet">Idade do pet</string>
+
+    <string-array name="pet_breeds">
+        <item>Akita Inu</item>
+        <item>Beagle</item>
+        <item>Bichon Frisé</item>
+        <item>Bully Pit</item>
+        <item>Cane Corso</item>
+        <item>Chihuahua</item>
+        <item>Cocker Spaniel</item>
+        <item>Dachshund</item>
+        <item>Doberman</item>
+        <item>Fox Paulistinha</item>
+        <item>Golden Retriever</item>
+        <item>Labrador Retriever</item>
+        <item>Maltês</item>
+        <item>Pastor Alemão</item>
+        <item>Pekingese</item>
+        <item>Pomeranian</item>
+        <item>Poodle</item>
+        <item>Rottweiler</item>
+        <item>Schnauzer</item>
+        <item>Shih Tzu</item>
+        <item>Yorkshire Terrier</item>
+        <item>Pit Bull</item>
+        <item>Border Collie</item>
+        <item>Basset Hound</item>
+        <item>French Bulldog</item>
+        <item>Cavalier King Charles Spaniel</item>
+        <item>Catahoula</item>
+        <item>Chow Chow</item>
+        <item>Jack Russell Terrier</item>
+        <item>Mastiff</item>
+        <item>Pit Bull Terrier</item>
+        <item>Saluki</item>
+        <item>Whippet</item>
+    </string-array>
+    <string-array name="type_animal_spinner">
+        <item>Gato</item>
+        <item>Cachorro</item>
+
+    </string-array>
+
 </resources>
+
