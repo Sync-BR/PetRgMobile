@@ -28,7 +28,6 @@ public class CompleteRegistration extends AppCompatActivity implements Structure
         setContentView(R.layout.activity_termo_uso);
         initializeUI();
         setupListeners();
-        disableButton();
     }
 
     @Override

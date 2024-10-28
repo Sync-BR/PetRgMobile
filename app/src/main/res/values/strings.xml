@@ -24,6 +24,10 @@
     <string name="adicionarPets">Adicionar Pet</string>
     <string name="namepet">Nome do pet</string>
     <string name="agepet">Idade do pet</string>
+    <string name="weigth_pet">Peso do animal de estimação</string>
+    <string name="observation_pet">Observação</string>
+    <string name="selecionar_imagem">Selecionar Imagem</string>
+    <string name="imagem_selecionada">Imagem selecionada</string>
 
     <string-array name="pet_breeds">
         <item>Akita Inu</item>
@@ -60,10 +64,37 @@
         <item>Saluki</item>
         <item>Whippet</item>
     </string-array>
+    <string-array name="racas_gatos">
+        <item>Persa</item>
+        <item>Siamês</item>
+        <item>Maine Coon</item>
+        <item>Ragdoll</item>
+        <item>Sphynx</item>
+        <item>Exótico de Pelo Curto</item>
+        <item>Bengal</item>
+        <item>Angorá Turco</item>
+        <item>Abissínio</item>
+        <item>British Shorthair</item>
+        <item>Scottish Fold</item>
+        <item>Norueguês da Floresta</item>
+        <item>Siberiano</item>
+        <item>Birmanês</item>
+        <item>Bombay</item>
+        <item>Chartreux</item>
+        <item>Cornish Rex</item>
+        <item>Devon Rex</item>
+        <item>Manx</item>
+        <item>Oriental Shorthair</item>
+        <item>Singapura</item>
+        <item>American Shorthair</item>
+        <item>Savannah</item>
+        <item>Himalaio</item>
+        <item>Toyger</item>
+        <item>Sem Raça Definida</item>
+    </string-array>
     <string-array name="type_animal_spinner">
         <item>Gato</item>
         <item>Cachorro</item>
-
     </string-array>
 
 </resources>

@@ -1,6 +1,6 @@
 package com.petrg.meuspets.enums;
 
-public enum PetBreedEnums {
+public enum DogBreedEnums {
     AKITA_INU("Akita Inu"),
     BEAGLE("Beagle"),
     BICHON_FRISE("Bichon Frisé"),
@@ -37,7 +37,7 @@ public enum PetBreedEnums {
     private String race;
     private int value;
 
-    PetBreedEnums(String race){
+    DogBreedEnums(String race){
         this.race = race;
         this.value = ordinal();
     }
