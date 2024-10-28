@@ -9,13 +9,11 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.petrg.meuspets.R;
 import com.petrg.meuspets.activity.pet.RegisterPetActivity;
-import com.petrg.meuspets.enums.PetBreedEnums;
 import com.petrg.meuspets.implementation.Structure;
 
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 public class UserActivity extends AppCompatActivity implements Structure {
