@@ -1,5 +1,6 @@
 package com.petrg.meuspets.activity.pet;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,6 +8,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -16,19 +19,28 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.petrg.meuspets.R;
+import com.petrg.meuspets.activity.register.RegisterActivity;
 import com.petrg.meuspets.enums.CatBreedEnums;
 import com.petrg.meuspets.enums.DogBreedEnums;
 import com.petrg.meuspets.enums.TypeAnimals;
 import com.petrg.meuspets.implementation.Structure;
+import com.petrg.meuspets.model.PetModel;
 import com.petrg.meuspets.service.upload.UploadImage;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class RegisterPetActivity extends AppCompatActivity implements Structure {
     private Spinner petBreed, typeAnimal;
-    private EditText name, age, weightPet, observation, photo;
-    private Button selectimg;
+    private EditText name, age, weightPet, observation, photo, textDate;
+    private CheckBox castrated;
+    private Button selectimg, buttonNext, buttonReturn;
     private ImageView Img_selected;
     private int breedValue = 0;
+    private int idUser;
     private UploadImage uploadImage;
+    private Calendar myCalendar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,6 +49,7 @@ public class RegisterPetActivity extends AppCompatActivity implements Structure 
         initializeUI();
         setupListeners();
         animalAdapter();
+        getCalendar();
     }
 
     @Override
@@ -49,6 +62,11 @@ public class RegisterPetActivity extends AppCompatActivity implements Structure 
         observation = findViewById(R.id.observation_pet);
         selectimg = findViewById(R.id.select_imagem);
         Img_selected = findViewById(R.id.image_selected);
+        castrated = findViewById(R.id.check_castrated);
+        textDate = findViewById(R.id.text_data_castrated);
+        buttonNext.findViewById(R.id.button_register_pet);
+        buttonReturn.findViewById(R.id.button_register_pet_return);
+        textDate.setVisibility(View.INVISIBLE);
         uploadImage = new UploadImage(this);
 
     }
@@ -94,6 +112,16 @@ public class RegisterPetActivity extends AppCompatActivity implements Structure 
                 uploadImage.openGallery();
             }
         });
+        castrated.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            verificationCastrated();
+        });
+        buttonNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+             //   generatePetModel()
+            }
+        });
+
     }
 
     @Override
@@ -113,6 +141,17 @@ public class RegisterPetActivity extends AppCompatActivity implements Structure 
     @Override
     public void enableButton() {
 
+    }
+
+    private boolean verificationCastrated() {
+        if (castrated.isChecked()) {
+            textDate.setVisibility(View.VISIBLE);
+            textDate.setEnabled(true);
+        } else {
+            textDate.setEnabled(false);
+            textDate.setVisibility(View.INVISIBLE);
+        }
+        return false;
     }
 
     private void animalAdapter() {
@@ -137,38 +176,61 @@ public class RegisterPetActivity extends AppCompatActivity implements Structure 
     }
 
     private TypeAnimals getAnimalType(String animalType) {
-        TypeAnimals selectedAnimal = null;
         for (TypeAnimals type : TypeAnimals.values()) {
             if (type.getAnimal().equals(animalType)) {
-
                 return type;
             }
-
         }
-        return selectedAnimal;
+        return null;
     }
 
     //Get dog breed
-    private void getDogBreed(String raceSelected) {
-        DogBreedEnums dogBreed = null;
+    private DogBreedEnums getDogBreed(String raceSelected) {
         for (DogBreedEnums dogs : DogBreedEnums.values()) {
             if (dogs.getRace().equals(raceSelected)) {
-                dogBreed = dogs;
-                break;
+                Toast.makeText(RegisterPetActivity.this, "Raça: " + raceSelected + ", Value: " + dogs.getValue(), Toast.LENGTH_LONG).show();
+                return dogs;
             }
         }
-        Toast.makeText(RegisterPetActivity.this, "Raça: " + raceSelected + ", Value: " + dogBreed.getValue(), Toast.LENGTH_LONG).show();
+        return null;
     }
 
-    private void getCatBreed(String raceSelected) {
-        CatBreedEnums catBreedE = null;
+    private CatBreedEnums getCatBreed(String raceSelected) {
         for (CatBreedEnums cats : CatBreedEnums.values()) {
             if (cats.getRace().equals(raceSelected)) {
-                catBreedE = cats;
-                break;
+                Toast.makeText(RegisterPetActivity.this, "Raça: " + raceSelected + ", Value: " + cats.getValue(), Toast.LENGTH_LONG).show();
+                return cats;
             }
         }
-        Toast.makeText(RegisterPetActivity.this, "Raça: " + raceSelected + ", Value: " + catBreedE.getValue(), Toast.LENGTH_LONG).show();
+        return null;
+    }
+
+    private void updateDate() {
+        String myFormat = "dd/MM/YYYY";
+        SimpleDateFormat format = new SimpleDateFormat(myFormat, new Locale("pt", "BR"));
+        textDate.setText(format.format(myCalendar.getTime()));
+    }
+
+    private void getCalendar() {
+        myCalendar = Calendar.getInstance();
+        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+                myCalendar.set(year, monthOfYear, dayOfMonth);
+                updateDate();
+            }
+        };
+        textDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(RegisterPetActivity.this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+    }
+
+    private PetModel generatePetModel(int id_usuario, String namePet, int agePet, DogBreedEnums race, TypeAnimals typeAnimal, Double weightPet, String observation) {
+        PetModel petModel = null;
+        return petModel = new PetModel(id_usuario, namePet, agePet, race, typeAnimal, weightPet, observation);
     }
 
     public int getBreedValue() {
