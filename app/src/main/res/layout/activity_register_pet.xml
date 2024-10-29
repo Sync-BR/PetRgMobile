@@ -85,5 +85,37 @@
             android:text="@string/selecionar_imagem" />
     </LinearLayout>
 
+    <CheckBox
+        android:id="@+id/check_castrated"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/check_castrated" />
+
+    <EditText
+        android:id="@+id/text_data_castrated"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="date"
+        android:hint="@string/castrated"
+        android:focusable="false"
+        android:clickable="true"/>
+
+    <Button
+        android:id="@+id/button_register_pet"
+        style="@style/Widget.Design.BottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/buttonRegister" />
+    <Button
+        android:id="@+id/button_register_pet_return"
+        style="@style/Widget.Design.BottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/cancelar" />
 
 </LinearLayout>
