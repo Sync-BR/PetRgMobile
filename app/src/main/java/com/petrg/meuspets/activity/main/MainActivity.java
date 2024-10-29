@@ -76,6 +76,9 @@ public class MainActivity extends AppCompatActivity implements Structure {
         loginService.autenticar(userDados, MainActivity.this, new AuthCallback() {
             @Override
             public void onAuthSuccess() {
+                //Criar funcionalidade para obter o id do username dessa porra!!!
+                Intent screeUser = new Intent(MainActivity.this, UserActivity.class);
+
                 startActivity(new Intent(MainActivity.this, UserActivity.class));
             }
 
