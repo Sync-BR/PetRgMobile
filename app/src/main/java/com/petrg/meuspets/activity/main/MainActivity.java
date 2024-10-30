@@ -15,6 +15,7 @@ import com.petrg.meuspets.R;
 import com.petrg.meuspets.activity.register.RegisterActivity;
 import com.petrg.meuspets.activity.user.UserActivity;
 import com.petrg.meuspets.callbacks.AuthCallback;
+import com.petrg.meuspets.callbacks.usuario.ReceiveUserdataCallBack;
 import com.petrg.meuspets.implementation.Structure;
 import com.petrg.meuspets.model.LoginModel;
 import com.petrg.meuspets.service.LoginService;
@@ -76,10 +77,19 @@ public class MainActivity extends AppCompatActivity implements Structure {
         loginService.autenticar(userDados, MainActivity.this, new AuthCallback() {
             @Override
             public void onAuthSuccess() {
-                //Criar funcionalidade para obter o id do username dessa porra!!!
-                Intent screeUser = new Intent(MainActivity.this, UserActivity.class);
+                // Chama getUsuario de forma assíncrona
+                loginService.getUsuario(userDados.getUsername(), new ReceiveUserdataCallBack() {
+                    @Override
+                    public void onSuccess(LoginModel loginModel) {
+                        startActivity(new Intent(MainActivity.this, UserActivity.class).putExtra("usuario", loginModel));
+                    }
 
-                startActivity(new Intent(MainActivity.this, UserActivity.class));
+                    @Override
+                    public void onError(Exception e) {
+                        // Tratamento de erro, caso necessário
+                        enableButton();
+                    }
+                });
             }
 
             @Override
@@ -89,27 +99,28 @@ public class MainActivity extends AppCompatActivity implements Structure {
         });
     }
 
-    @Override
-    public void disableButton() {
-        buttonLogin.setEnabled(false);
-        buttonRegister.setEnabled(false);
-    }
 
     @Override
-    public void enableButton() {
-        buttonLogin.setEnabled(true);
-        buttonRegister.setEnabled(true);
-    }
+public void disableButton() {
+    buttonLogin.setEnabled(false);
+    buttonRegister.setEnabled(false);
+}
 
-    public void savePreferences() {
-        sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        boolean rememberMe = sharedPreferences.getBoolean(KEY_REMEMBER_ME, false);
-        if (rememberMe) {
-            String savedUsername = sharedPreferences.getString(KEY_USERNAME, "");
-            String savedPassword = sharedPreferences.getString(KEY_PASSWORD, "");
-            userLogin.setText(savedUsername);
-            userPassword.setText(savedPassword);
-            checkBox.setChecked(true);
-        }
+@Override
+public void enableButton() {
+    buttonLogin.setEnabled(true);
+    buttonRegister.setEnabled(true);
+}
+
+public void savePreferences() {
+    sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+    boolean rememberMe = sharedPreferences.getBoolean(KEY_REMEMBER_ME, false);
+    if (rememberMe) {
+        String savedUsername = sharedPreferences.getString(KEY_USERNAME, "");
+        String savedPassword = sharedPreferences.getString(KEY_PASSWORD, "");
+        userLogin.setText(savedUsername);
+        userPassword.setText(savedPassword);
+        checkBox.setChecked(true);
     }
+}
 }
