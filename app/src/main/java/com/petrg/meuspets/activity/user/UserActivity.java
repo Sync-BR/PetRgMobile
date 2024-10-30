@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.petrg.meuspets.R;
 import com.petrg.meuspets.activity.pet.RegisterPetActivity;
 import com.petrg.meuspets.implementation.Structure;
+import com.petrg.meuspets.model.LoginModel;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 public class UserActivity extends AppCompatActivity implements Structure {
     private Toolbar toolbar;
     private AppCompatImageButton addNewPet;
+    private LoginModel loginModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +33,9 @@ public class UserActivity extends AppCompatActivity implements Structure {
     public void initializeUI() {
         toolbar = findViewById(R.id.toolbar);
         addNewPet = findViewById(R.id.add_pet_button);
-
+        Intent intent = getIntent();
+        loginModel = (LoginModel) intent.getSerializableExtra("usuario");
+        System.out.println("tela user: " +loginModel);
         setSupportActionBar(toolbar);
     }
 
@@ -40,7 +44,7 @@ public class UserActivity extends AppCompatActivity implements Structure {
         addNewPet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent addPetScreen = new Intent(UserActivity.this, RegisterPetActivity.class);
+                Intent addPetScreen = new Intent(UserActivity.this, RegisterPetActivity.class).putExtra("usuario", loginModel);
                 startActivity(addPetScreen);
             }
         });
