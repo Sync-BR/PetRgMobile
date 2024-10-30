@@ -24,7 +24,9 @@ import com.petrg.meuspets.enums.CatBreedEnums;
 import com.petrg.meuspets.enums.DogBreedEnums;
 import com.petrg.meuspets.enums.TypeAnimals;
 import com.petrg.meuspets.implementation.Structure;
+import com.petrg.meuspets.model.LoginModel;
 import com.petrg.meuspets.model.PetModel;
+import com.petrg.meuspets.model.UploadModel;
 import com.petrg.meuspets.service.upload.UploadImage;
 
 import java.text.SimpleDateFormat;
@@ -33,7 +35,8 @@ import java.util.Locale;
 
 public class RegisterPetActivity extends AppCompatActivity implements Structure {
     private Spinner petBreed, typeAnimal;
-    private EditText name, age, weightPet, observation, photo, textDate;
+    private EditText name, age, weightPet, observation, textDate;
+    private String photo;
     private CheckBox castrated;
     private Button selectimg, buttonNext, buttonReturn;
     private ImageView Img_selected;
@@ -41,6 +44,7 @@ public class RegisterPetActivity extends AppCompatActivity implements Structure 
     private int idUser;
     private UploadImage uploadImage;
     private Calendar myCalendar;
+    private LoginModel loginModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,15 +64,13 @@ public class RegisterPetActivity extends AppCompatActivity implements Structure 
         age = findViewById(R.id.age_pet);
         weightPet = findViewById(R.id.weigth_pet);
         observation = findViewById(R.id.observation_pet);
-        selectimg = findViewById(R.id.select_imagem);
-        Img_selected = findViewById(R.id.image_selected);
         castrated = findViewById(R.id.check_castrated);
         textDate = findViewById(R.id.text_data_castrated);
-        buttonNext.findViewById(R.id.button_register_pet);
-        buttonReturn.findViewById(R.id.button_register_pet_return);
+        buttonNext = findViewById(R.id.button_register_pet);
+        buttonReturn = findViewById(R.id.button_register_pet_return);
         textDate.setVisibility(View.INVISIBLE);
-        uploadImage = new UploadImage(this);
-
+        Intent intent = getIntent();
+        loginModel = (LoginModel) intent.getSerializableExtra("usuario");
     }
 
     @Override
@@ -106,41 +108,64 @@ public class RegisterPetActivity extends AppCompatActivity implements Structure 
 
             }
         });
-        selectimg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                uploadImage.openGallery();
-            }
-        });
+
         castrated.setOnCheckedChangeListener((buttonView, isChecked) -> {
             verificationCastrated();
         });
-        buttonNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-             //   generatePetModel()
-            }
-        });
+
+            buttonNext.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    checkAllFields();
+                    try {
+                        int id_usuario = loginModel.getUsuarioModel().getId();
+                        String namePet = name.getText().toString();
+                        int agePet = Integer.parseInt(age.getText().toString());
+                        TypeAnimals typeAnimalEnum = getAnimalType(typeAnimal.getSelectedItem().toString());
+                        Double weight = Double.parseDouble(weightPet.getText().toString());
+                        String observationText = observation.getText().toString();
+                        System.out.println("Value: " +typeAnimalEnum.getValue());
+                        if(typeAnimalEnum.getAnimal() == TypeAnimals.cat.getAnimal()){
+                            CatBreedEnums catBreedEnums = getCatBreed(petBreed.getSelectedItem().toString());
+                            PetModel petModelCat = new PetModel(id_usuario, namePet, agePet, catBreedEnums, typeAnimalEnum, weight, observationText);
+                            Intent registrationPetScree = new Intent(RegisterPetActivity.this, CompletePetRegistration.class);
+                            registrationPetScree.putExtra("usuario", loginModel);
+                            registrationPetScree.putExtra("pet", petModelCat);
+                            startActivity(registrationPetScree);
+
+                        } else {
+                            DogBreedEnums race = getDogBreed(petBreed.getSelectedItem().toString());
+                            System.out.println("Raça selecionada: " +race);
+                            System.out.println("Animal selecionado " +typeAnimalEnum);
+
+                            PetModel petModelDog = new PetModel(id_usuario, namePet, agePet, race, typeAnimalEnum, weight, observationText);
+                            Intent registrationPetScree = new Intent(RegisterPetActivity.this, CompletePetRegistration.class);
+                            registrationPetScree.putExtra("usuario", loginModel);
+                            registrationPetScree.putExtra("pet", petModelDog);
+                            startActivity(registrationPetScree);
+
+
+                        }
+
+
+                    } catch (NumberFormatException e) {
+                        Toast.makeText(RegisterPetActivity.this, "Por favor, insira valores válidos.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == UploadImage.pickImageRequest && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri imageUri = data.getData();
-            Img_selected.setImageURI(imageUri);
-        }
-    }
 
     @Override
     public void disableButton() {
-
+        buttonNext.setEnabled(false);
     }
 
     @Override
     public void enableButton() {
-
+        buttonNext.setEnabled(true);
     }
 
     private boolean verificationCastrated() {
@@ -233,7 +258,22 @@ public class RegisterPetActivity extends AppCompatActivity implements Structure 
         return petModel = new PetModel(id_usuario, namePet, agePet, race, typeAnimal, weightPet, observation);
     }
 
+    public boolean checkAllFields() {
+        if (name.length() == 0) {
+            name.setError("Por favor, insira o nome.");
+            return false;
+        } else if (age.length() == 0) {
+            age.setError("O campo da idade não pode estar vazio.");
+            return false;
+        }
+        return true;
+    }
+
     public int getBreedValue() {
         return breedValue;
+    }
+
+    public String getPhoto() {
+        return photo;
     }
 }
