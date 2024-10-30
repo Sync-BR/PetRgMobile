@@ -64,26 +64,39 @@
         android:minLines="5"
         android:scrollbars="vertical" />
 
-    <LinearLayout
+
+
+    <CheckBox
+        android:id="@+id/check_castrated"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="16dp">
+        android:text="@string/check_castrated" />
 
-        <ImageView
-            android:id="@+id/image_selected"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="16dp"
-            android:contentDescription="@string/imagem_selecionada" />
+    <EditText
+        android:id="@+id/text_data_castrated"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="date"
+        android:hint="@string/castrated"
+        android:focusable="false"
+        android:clickable="true"/>
 
-        <Button
-            android:id="@+id/select_imagem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/selecionar_imagem" />
-    </LinearLayout>
-
+    <Button
+        android:id="@+id/button_register_pet"
+        style="@style/Widget.Design.BottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/buttonRegister" />
+    <Button
+        android:id="@+id/button_register_pet_return"
+        style="@style/Widget.Design.BottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/cancelar" />
 
 </LinearLayout>

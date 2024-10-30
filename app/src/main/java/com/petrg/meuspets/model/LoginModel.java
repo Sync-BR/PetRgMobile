@@ -6,6 +6,7 @@ public class LoginModel implements Serializable {
     private int id;
     private String username;
     private String password;
+    private UsuarioModel usuario;
 
 
     public LoginModel() {
@@ -22,6 +23,7 @@ public class LoginModel implements Serializable {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", usuarioModel=" + usuario +
                 '}';
     }
 
@@ -47,5 +49,13 @@ public class LoginModel implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public UsuarioModel getUsuarioModel() {
+        return usuario;
+    }
+
+    public void setUsuarioModel(UsuarioModel usuarioModel) {
+        this.usuario = usuarioModel;
     }
 }

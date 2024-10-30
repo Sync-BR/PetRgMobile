@@ -28,6 +28,8 @@
     <string name="observation_pet">Observação</string>
     <string name="selecionar_imagem">Selecionar Imagem</string>
     <string name="imagem_selecionada">Imagem selecionada</string>
+    <string name="castrated">Data de castração</string>
+    <string name="check_castrated">Castrado</string>
 
     <string-array name="pet_breeds">
         <item>Akita Inu</item>
