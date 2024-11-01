@@ -9,18 +9,25 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.petrg.meuspets.R;
 import com.petrg.meuspets.activity.pet.RegisterPetActivity;
+import com.petrg.meuspets.callbacks.usuario.PetCallBack;
 import com.petrg.meuspets.implementation.Structure;
 import com.petrg.meuspets.model.LoginModel;
+import com.petrg.meuspets.model.PetModel;
+import com.petrg.meuspets.service.register.ValidationService;
 
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.List;
+
 public class UserActivity extends AppCompatActivity implements Structure {
     private Toolbar toolbar;
     private AppCompatImageButton addNewPet;
     private LoginModel loginModel;
+    private ValidationService validarPets = new ValidationService(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,10 +39,24 @@ public class UserActivity extends AppCompatActivity implements Structure {
     @Override
     public void initializeUI() {
         toolbar = findViewById(R.id.toolbar);
-        addNewPet = findViewById(R.id.add_pet_button);
         Intent intent = getIntent();
+        addNewPet = findViewById(R.id.add_pet_button);
         loginModel = (LoginModel) intent.getSerializableExtra("usuario");
-        System.out.println("tela user: " +loginModel);
+        validarPets.getPetUser(loginModel.getUsuarioModel().getId(), new PetCallBack() {
+            @Override
+            public void onSuccess(List<PetModel>[] pet) {
+                final List<PetModel> listaPets[] = pet;
+                addNewPet.setVisibility(View.INVISIBLE);
+            }
+            @Override
+            public void empty() {
+                addNewPet.setVisibility(View.VISIBLE);
+            }
+            @Override
+            public void onError() {
+                Toast.makeText(UserActivity.this, "Erro no sistema!", Toast.LENGTH_LONG).show();
+            }
+        });
         setSupportActionBar(toolbar);
     }
 
