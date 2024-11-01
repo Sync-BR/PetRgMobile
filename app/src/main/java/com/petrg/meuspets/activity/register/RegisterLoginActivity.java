@@ -11,14 +11,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.petrg.meuspets.R;
-import com.petrg.meuspets.callbacks.register.ValidationCallback;
 import com.petrg.meuspets.callbacks.register.ValidationUserNameCallBack;
 import com.petrg.meuspets.implementation.Structure;
 import com.petrg.meuspets.model.LoginModel;
 import com.petrg.meuspets.model.UsuarioModel;
-import com.petrg.meuspets.service.register.Validation;
-
-import java.text.ParseException;
+import com.petrg.meuspets.service.register.ValidationService;
 
 public class RegisterLoginActivity extends AppCompatActivity implements Structure {
     private EditText username, password, repeatPassword;
@@ -56,7 +53,7 @@ public class RegisterLoginActivity extends AppCompatActivity implements Structur
                 disableButton();
                 if (checkAllFields()) {
                     if (checkIdenticalPassword(password.getText().toString(), repeatPassword.getText().toString())) {
-                        Validation validationUsername = new Validation(RegisterLoginActivity.this);
+                        ValidationService validationUsername = new ValidationService(RegisterLoginActivity.this);
                         validationUsername.validationUsername(username.getText().toString(), new ValidationUserNameCallBack() {
                             @Override
                             public void onAuthSuccess() {
