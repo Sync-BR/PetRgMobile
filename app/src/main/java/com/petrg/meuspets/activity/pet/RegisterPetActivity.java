@@ -137,7 +137,6 @@ public class RegisterPetActivity extends AppCompatActivity implements Structure 
                             DogBreedEnums race = getDogBreed(petBreed.getSelectedItem().toString());
                             System.out.println("Raça selecionada: " +race);
                             System.out.println("Animal selecionado " +typeAnimalEnum);
-
                             PetModel petModelDog = new PetModel(id_usuario, namePet, agePet, race, typeAnimalEnum, weight, observationText);
                             Intent registrationPetScree = new Intent(RegisterPetActivity.this, CompletePetRegistration.class);
                             registrationPetScree.putExtra("usuario", loginModel);

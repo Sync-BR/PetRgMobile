@@ -17,7 +17,7 @@ import com.petrg.meuspets.activity.main.MainActivity;
 import com.petrg.meuspets.callbacks.register.ValidationCallback;
 import com.petrg.meuspets.callbacks.register.ValidationCpfCallback;
 import com.petrg.meuspets.implementation.Structure;
-import com.petrg.meuspets.service.register.Validation;
+import com.petrg.meuspets.service.register.ValidationService;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -69,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity implements Structure {
             public void onClick(View view) {
                 disableButton();
                 if(checkAllFields()){
-                    Validation validation = new Validation(RegisterActivity.this);
+                    ValidationService validation = new ValidationService(RegisterActivity.this);
                     validation.validationEmail(textEmail.getText().toString(), new ValidationCallback() {
                         @Override
                         public void onAuthSuccess() {

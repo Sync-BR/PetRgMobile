@@ -75,10 +75,6 @@ public class UploadImage {
                 public void onResponse(Call call, Response response) throws IOException {
                     if (response.isSuccessful()) {
                         String responseBody = response.body().string();
-                        // Tratar resposta de sucesso
-                    } else {
-                        System.out.println("falhou");
-                        // Tratar resposta de erro
                     }
                 }
             });

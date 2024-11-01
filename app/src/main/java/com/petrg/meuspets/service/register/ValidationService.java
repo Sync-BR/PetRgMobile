@@ -2,23 +2,68 @@ package com.petrg.meuspets.service.register;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.petrg.meuspets.activity.register.RegisterActivity;
 import com.petrg.meuspets.activity.register.RegisterLoginActivity;
 import com.petrg.meuspets.callbacks.register.ValidationCallback;
 import com.petrg.meuspets.callbacks.register.ValidationCpfCallback;
 import com.petrg.meuspets.callbacks.register.ValidationUserNameCallBack;
+import com.petrg.meuspets.callbacks.usuario.PetCallBack;
+import com.petrg.meuspets.model.PetModel;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.List;
 
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class Validation {
+public class ValidationService {
     private Context context;
 
-    public Validation(Context context) {
+    public ValidationService(Context context) {
         this.context = context;
+    }
+
+    public List<PetModel> convertJsonToPetList(String json) {
+        Gson gson = new Gson();
+        Type petListType = new TypeToken<List<PetModel>>() {
+        }.getType();
+        return gson.fromJson(json, petListType);
+    }
+
+    public void getPetUser(int idUser, PetCallBack petCallBack) {
+        final String url = "http://186.247.89.58:8080/api/pets/consultar/" + idUser;
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url(url).get().build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                petCallBack.onError();
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String jsonResponse = response.body().string();
+                    final List<PetModel> listPet = convertJsonToPetList(jsonResponse);
+                    if (!listPet.isEmpty()) {
+                        petCallBack.onSuccess(new List[]{listPet});
+                    } else {
+                        petCallBack.empty();
+                    }
+                } else {
+                    petCallBack.onError();
+                }
+            }
+        });
+
     }
 
     public void validationEmail(String email, ValidationCallback validation) {
@@ -43,6 +88,7 @@ public class Validation {
             }
         }).start();
     }
+
     public void validationCpf(String cpf, ValidationCpfCallback validationCPF) {
         String url = "http://186.247.89.58:8080/api/user/check/cpf/" + cpf;
         OkHttpClient cliente = new OkHttpClient();
@@ -65,6 +111,7 @@ public class Validation {
             }
         }).start();
     }
+
     public void validationUsername(String username, ValidationUserNameCallBack validationCallback) {
         String url = "http://186.247.89.58:8080/api/login/check/username/" + username;
         OkHttpClient cliente = new OkHttpClient();
