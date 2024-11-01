@@ -22,6 +22,9 @@ public class PetModel implements Serializable {
     private String photo;
     private LocalDate castratedDate;
 
+    public PetModel() {
+    }
+
     public PetModel(String photo) {
         this.photo = photo;
     }
