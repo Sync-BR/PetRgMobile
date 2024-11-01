@@ -1,7 +1,6 @@
 package com.petrg.meuspets.service.register;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -17,7 +16,6 @@ import com.petrg.meuspets.model.PetModel;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Call;
@@ -26,10 +24,10 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class Validation {
+public class ValidationService {
     private Context context;
 
-    public Validation(Context context) {
+    public ValidationService(Context context) {
         this.context = context;
     }
 
@@ -54,8 +52,6 @@ public class Validation {
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (response.isSuccessful()) {
                     String jsonResponse = response.body().string();
-                    System.out.println(jsonResponse);
-                    Gson gson = new Gson();
                     final List<PetModel> listPet = convertJsonToPetList(jsonResponse);
                     if (!listPet.isEmpty()) {
                         petCallBack.onSuccess(new List[]{listPet});
