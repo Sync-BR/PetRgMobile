@@ -20,6 +20,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class UserActivity extends AppCompatActivity implements Structure {
@@ -34,6 +36,8 @@ public class UserActivity extends AppCompatActivity implements Structure {
         setContentView(R.layout.activity_usuarios);
         initializeUI();
         setupListeners();
+        validatePets();
+        setSupportActionBar(toolbar);
     }
 
     @Override
@@ -42,22 +46,6 @@ public class UserActivity extends AppCompatActivity implements Structure {
         Intent intent = getIntent();
         addNewPet = findViewById(R.id.add_pet_button);
         loginModel = (LoginModel) intent.getSerializableExtra("usuario");
-        validarPets.getPetUser(loginModel.getUsuarioModel().getId(), new PetCallBack() {
-            @Override
-            public void onSuccess(List<PetModel>[] pet) {
-                final List<PetModel> listaPets[] = pet;
-                addNewPet.setVisibility(View.INVISIBLE);
-            }
-            @Override
-            public void empty() {
-                addNewPet.setVisibility(View.VISIBLE);
-            }
-            @Override
-            public void onError() {
-                Toast.makeText(UserActivity.this, "Erro no sistema!", Toast.LENGTH_LONG).show();
-            }
-        });
-        setSupportActionBar(toolbar);
     }
 
     @Override
@@ -99,6 +87,29 @@ public class UserActivity extends AppCompatActivity implements Structure {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void validatePets() {
+        validarPets.getPetUser(loginModel.getUsuarioModel().getId(), new PetCallBack() {
+            @Override
+            public void onSuccess(List<PetModel>[] pet) {
+                List<PetModel> listPets = new ArrayList<>();
+                for (List<PetModel> pets : pet) {
+                    listPets.addAll(pets);
+                }
+                addNewPet.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void empty() {
+                addNewPet.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onError() {
+                Toast.makeText(UserActivity.this, "Erro no sistema!", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 
