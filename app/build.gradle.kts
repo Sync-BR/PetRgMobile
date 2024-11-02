@@ -32,6 +32,7 @@ android {
 }
 
 dependencies {
+    implementation ("androidx.recyclerview:recyclerview:1.2.1")
     implementation ("commons-io:commons-io:2.11.0")
     implementation ("androidx.appcompat:appcompat:1.6.1")
     implementation ("com.squareup.okhttp3:okhttp:4.9.0")
@@ -43,6 +44,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation(libs.recyclerview)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
