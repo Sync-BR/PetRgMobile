@@ -14,7 +14,12 @@ import com.petrg.meuspets.callbacks.usuario.PetCallBack;
 import com.petrg.meuspets.implementation.Structure;
 import com.petrg.meuspets.model.LoginModel;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+import com.petrg.meuspets.model.PetModel;
+import com.petrg.meuspets.service.register.ValidationService;
+>>>>>>> refactor
 =======
 import com.petrg.meuspets.model.PetModel;
 import com.petrg.meuspets.service.register.ValidationService;
@@ -33,6 +38,12 @@ public class UserActivity extends AppCompatActivity implements Structure {
     private AppCompatImageButton addNewPet;
     private LoginModel loginModel;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    private ValidationService validarPets;
+    private PetAdapter petAdapter;
+    private List<PetModel> listPet;
+>>>>>>> refactor
 =======
     private ValidationService validarPets;
     private PetAdapter petAdapter;
@@ -60,8 +71,12 @@ public class UserActivity extends AppCompatActivity implements Structure {
         Intent intent = getIntent();
         loginModel = (LoginModel) intent.getSerializableExtra("usuario");
 <<<<<<< HEAD
+<<<<<<< HEAD
         System.out.println("tela user: " +loginModel);
         setSupportActionBar(toolbar);
+=======
+        validarPets = new ValidationService(this);
+>>>>>>> refactor
 =======
         validarPets = new ValidationService(this);
 >>>>>>> refactor

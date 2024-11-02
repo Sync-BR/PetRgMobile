@@ -33,6 +33,10 @@ android {
 
 dependencies {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    implementation ("androidx.recyclerview:recyclerview:1.2.1")
+>>>>>>> refactor
 =======
     implementation ("androidx.recyclerview:recyclerview:1.2.1")
 >>>>>>> refactor

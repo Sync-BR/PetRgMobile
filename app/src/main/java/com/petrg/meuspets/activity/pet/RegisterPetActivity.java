@@ -138,7 +138,10 @@ public class RegisterPetActivity extends AppCompatActivity implements Structure 
                             System.out.println("Raça selecionada: " +race);
                             System.out.println("Animal selecionado " +typeAnimalEnum);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> refactor
 =======
 >>>>>>> refactor
                             PetModel petModelDog = new PetModel(id_usuario, namePet, agePet, race, typeAnimalEnum, weight, observationText);
