@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.pet.RegisterPetActivity">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginBottom="40dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+    <EditText
+        android:id="@+id/name_pet"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="@string/namepet" />
+
+    <EditText
+        android:id="@+id/age_pet"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="@string/agepet"
+        android:inputType="number" />
+
+    <Spinner
+        android:id="@+id/type_animal_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:id="@+id/breed_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/weigth_pet"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:hint="@string/weigth_pet"
+        android:inputType="numberDecimal"
+        android:maxLength="5" />
+
+    <EditText
+        android:id="@+id/observation_pet"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="@string/observation_pet"
+        android:inputType="textMultiLine"
+        android:maxLength="5"
+        android:maxLines="10"
+        android:minLines="5"
+        android:scrollbars="vertical" />
+
+
+
+    <CheckBox
+        android:id="@+id/check_castrated"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/check_castrated" />
+
+    <EditText
+        android:id="@+id/text_data_castrated"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="date"
+        android:hint="@string/castrated"
+        android:focusable="false"
+        android:clickable="true"/>
+
+    <Button
+        android:id="@+id/button_register_pet"
+        style="@style/Widget.Design.BottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/buttonRegister" />
+    <Button
+        android:id="@+id/button_register_pet_return"
+        style="@style/Widget.Design.BottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/cancelar" />
+
+</LinearLayout>

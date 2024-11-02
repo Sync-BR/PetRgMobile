@@ -1,0 +1,103 @@
+<resources>
+    <string name="app_name">Pet RG</string>
+    <string name="usuario">Usuario</string>
+    <string name="senha">Senha</string>
+    <string name="salvar_dados">Salvar dados</string>
+    <string name="conectar">Conectar</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="nome">Nome</string>
+    <string name="apelido">Apelido</string>
+    <string name="email">Email</string>
+    <string name="cpf">cpf</string>
+    <string name="telephone">telefone</string>
+    <string name="buttonRegister">Next</string>
+    <string name="button_register_return">Voltar</string>
+    <string name="registe_date">Data de nascimento</string>
+    <string name="login">Usuario</string>
+    <string name="password">Senha</string>
+    <string name="repeatpassword">Repetir senha</string>
+    <string name="termo_titulo">Termos de Uso do Aplicativo de Registro de Pets</string>
+    <string name="termo_description">1. Aceitação dos Termos Ao utilizar o nosso aplicativo de registro de pets, você concorda com os Termos de Uso aqui descritos. Caso não concorde, solicitamos que não utilize o aplicativo.\n\n2. Cadastro e Uso do Aplicativo O aplicativo permite que você cadastre informações sobre seu(s) pet(s), incluindo nome, raça, idade e outras características relevantes. Ao realizar o cadastro, você declara que as informações fornecidas são verdadeiras e corretas. É sua responsabilidade manter os dados atualizados.\n\n3. Propriedade dos Dados Todas as informações inseridas no aplicativo são de sua propriedade, no entanto, ao utilizar o aplicativo, você concede à nossa plataforma o direito de utilizar esses dados para melhorar nossos serviços, sempre em conformidade com as leis de proteção de dados vigentes.\n\n4. Privacidade e Segurança Nos comprometemos a proteger sua privacidade e a confidencialidade dos dados cadastrados. Nenhuma informação pessoal ou dados sobre seus pets serão divulgados a terceiros sem seu consentimento, exceto quando exigido por lei.\n\n5. Responsabilidades do Usuário Você se compromete a:\n\nNão utilizar o aplicativo para fins ilícitos ou não autorizados;\nNão transmitir vírus ou qualquer código de natureza destrutiva;\nGarantir que o uso do aplicativo por você esteja em conformidade com todas as leis locais.\n6. Alterações no Aplicativo Nós nos reservamos o direito de modificar, suspender ou descontinuar o aplicativo, total ou parcialmente, a qualquer momento, com ou sem aviso prévio.\n\n7. Limitação de Responsabilidade Não seremos responsáveis por qualquer dano direto ou indireto que possa surgir do uso ou da incapacidade de usar o aplicativo, incluindo, mas não se limitando a, perda de dados, lucros cessantes ou interrupção de serviços.\n\n8. Atualizações dos Termos Podemos atualizar estes Termos de Uso periodicamente. Você será notificado sobre mudanças significativas e, ao continuar a utilizar o aplicativo, você concorda com os Termos de Uso revisados.\n\n9. Contato Caso tenha dúvidas sobre estes Termos de Uso, entre em contato conosco através do e-mail [seu-email-de-suporte].</string>
+    <string name="aceita_termo">Estou ciente ao continuar utilizando o aplicativo, você concorda com estes Termos de Uso.</string>
+    <string name="completeRegistration">Registrar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="adicionarPets">Adicionar Pet</string>
+    <string name="namepet">Nome do pet</string>
+    <string name="agepet">Idade do pet</string>
+    <string name="weigth_pet">Peso do animal de estimação</string>
+    <string name="observation_pet">Observação</string>
+    <string name="selecionar_imagem">Selecionar Imagem</string>
+    <string name="imagem_selecionada">Imagem selecionada</string>
+    <string name="castrated">Data de castração</string>
+    <string name="check_castrated">Castrado</string>
+
+    <string-array name="pet_breeds">
+        <item>Akita Inu</item>
+        <item>Beagle</item>
+        <item>Bichon Frisé</item>
+        <item>Bully Pit</item>
+        <item>Cane Corso</item>
+        <item>Chihuahua</item>
+        <item>Cocker Spaniel</item>
+        <item>Dachshund</item>
+        <item>Doberman</item>
+        <item>Fox Paulistinha</item>
+        <item>Golden Retriever</item>
+        <item>Labrador Retriever</item>
+        <item>Maltês</item>
+        <item>Pastor Alemão</item>
+        <item>Pekingese</item>
+        <item>Pomeranian</item>
+        <item>Poodle</item>
+        <item>Rottweiler</item>
+        <item>Schnauzer</item>
+        <item>Shih Tzu</item>
+        <item>Yorkshire Terrier</item>
+        <item>Pit Bull</item>
+        <item>Border Collie</item>
+        <item>Basset Hound</item>
+        <item>French Bulldog</item>
+        <item>Cavalier King Charles Spaniel</item>
+        <item>Catahoula</item>
+        <item>Chow Chow</item>
+        <item>Jack Russell Terrier</item>
+        <item>Mastiff</item>
+        <item>Pit Bull Terrier</item>
+        <item>Saluki</item>
+        <item>Whippet</item>
+    </string-array>
+    <string-array name="racas_gatos">
+        <item>Persa</item>
+        <item>Siamês</item>
+        <item>Maine Coon</item>
+        <item>Ragdoll</item>
+        <item>Sphynx</item>
+        <item>Exótico de Pelo Curto</item>
+        <item>Bengal</item>
+        <item>Angorá Turco</item>
+        <item>Abissínio</item>
+        <item>British Shorthair</item>
+        <item>Scottish Fold</item>
+        <item>Norueguês da Floresta</item>
+        <item>Siberiano</item>
+        <item>Birmanês</item>
+        <item>Bombay</item>
+        <item>Chartreux</item>
+        <item>Cornish Rex</item>
+        <item>Devon Rex</item>
+        <item>Manx</item>
+        <item>Oriental Shorthair</item>
+        <item>Singapura</item>
+        <item>American Shorthair</item>
+        <item>Savannah</item>
+        <item>Himalaio</item>
+        <item>Toyger</item>
+        <item>Sem Raça Definida</item>
+    </string-array>
+    <string-array name="type_animal_spinner">
+        <item>Gato</item>
+        <item>Cachorro</item>
+    </string-array>
+
+</resources>
+
